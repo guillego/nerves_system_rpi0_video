@@ -1,7 +1,12 @@
-# Raspberry Pi Zero 2 W and 3 A+ (64-bit)
+# Raspberry Pi Zero 2 W and 3 A+ (64-bit) + Video
 
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_system_rpi0_2.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_system_rpi0_2)
 [![Hex version](https://img.shields.io/hexpm/v/nerves_system_rpi0_2.svg "Hex version")](https://hex.pm/packages/nerves_system_rpi0_2)
+
+This is a modified Nerves System configuration for the Raspberry Pi Zero 2W and the Pi 3A+ with the USB port running in gadget mode.
+It has additional libraries for video processing: ffmpeg, v4l and gstreamer.
+
+It is downstreamed from [nerves_system_rpi0](https://github.com/nerves-project/nerves_system_rpi0).
 
 This is the base Nerves System configuration for the Raspberry Pi Zero 2 W with
 the USB port running in gadget mode. It is similar to
@@ -77,6 +82,22 @@ cmd("amixer cset numid=3 2")
 ```
 
 Change the last argument to `amixer` to `1` to output to the stereo output jack.
+
+## Photo/Video
+The Raspberry Pi has a series of official cameras that connect to the boards.
+This system implements full support for both the old libraries (mmal-based) and the new ones (libcamera-based).
+More information in the (official docs)[https://www.raspberrypi.com/documentation/computers/camera_software.html].
+
+You can test if the camera works by running
+```elixir
+cmd("libcamera-jpeg -n -o /root/test_image.jpeg")
+```
+
+Additionally it provides video encoding support through ffmpeg and gstreamer. You can combine this with libcamera to record mp4 video:
+
+```elixir
+cmd"libcamera-vid -t $MAX_TIME --width $WIDTH --height $HEIGHT --framerate $FRAMERATE --bitrate $BITRATE -o - | ffmpeg -f h264 -i - -c:v copy $OUTPUT"
+```
 
 ## Linux's preempt_rt patches
 
