@@ -1,8 +1,8 @@
 defmodule NervesSystemRpi02.MixProject do
   use Mix.Project
 
-  @github_organization "nerves-project"
-  @app :nerves_system_rpi0_2
+  @github_organization "guillego"
+  @app :nerves_system_rpi0_video
   @source_url "https://github.com/#{@github_organization}/#{@app}"
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
@@ -76,7 +76,7 @@ defmodule NervesSystemRpi02.MixProject do
 
   defp description do
     """
-    Nerves System - Zero 2 W (64-bits)
+    Nerves System - Zero 2 W/3A+ (64-bits) + video support
     """
   end
 
