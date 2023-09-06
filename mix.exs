@@ -66,7 +66,10 @@ defmodule NervesSystemRpi02.MixProject do
 
   defp deps do
     [
-      {:nerves, "~> 1.5.4 or ~> 1.6.0 or ~> 1.7.15 or ~> 1.8 or ~> 1.10", runtime: false},
+      #{:nerves, "~> 1.5.4 or ~> 1.6.0 or ~> 1.7.15 or ~> 1.8 or ~> 1.10", runtime: false},
+      {:nerves, git: "https://github.com/nerves-project/nerves",
+      branch: "893-fix-shell-task",
+      override: true},
       {:nerves_system_br, "1.23.3", runtime: false},
       {:nerves_toolchain_aarch64_nerves_linux_gnu, "~> 1.8.0", runtime: false},
       {:nerves_system_linter, "~> 0.4", only: [:dev, :test], runtime: false},
